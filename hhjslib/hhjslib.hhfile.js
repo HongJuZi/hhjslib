@@ -65,45 +65,18 @@ var hexcase=0;var b64pad="";var chrsz=8;function hex_md5(a){return binl2hex(core
          * @var importFiles: {} 已经导入的文件容器
          */
         importFiles: {js: {}, css: {}},
-
-        /**
-         * 通用的加载方法
-         * 
-         * @desc
-         * 
-         * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param path 需要加载的文件
-         * @param callback 回调函数
-         */
-		import: function(path, callback) {
-            if('object' != typeof path) {
-                path    = [path];
-            }
-            var cssFiles    = [];
-            var jsFiles     = [];
-            for(var ele in path) {
-                switch(this._getFileType(path[ele])) {
-                    case 'js': cssFiles.push(path[ele]); break;
-                    case 'css': jsFiles.push(path[ele]); break;
-                    default: HHJsLib.warn('还不支持导入的文件类型！');
-                }
-			}
-            this.importCss(cssFiles);
-            this.importJs(jsFiles, callback);
-		},
-
+        
         /**
          * 得到当前加载的文件类型
          * 
-         * @desc
+         * 不包含.，如test.txt => txt
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
          * @access public
          * @param path 需要加载的文件
          * @return string 当前文件格式
          */
-        _getFileType: function(path) {
+        getFileExt: function(path) {
             var file    = path.substring(path.lastIndexOf('/'));
             var start   = file.indexOf('.') + 1;
             var end     = file.indexOf('?');
