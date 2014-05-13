@@ -71,27 +71,29 @@
          highLightElementByUrl: function(url, target, currentClass, level, callback) {
 	        var shortUrl    = url.substring(url.lastIndexOf('/') + 1);//拿到当前访问的页面及查询内容
 	        $(target).each(function() {
-	            var curHref     = jQuery(this).find('a:first').attr('href');
-	            if(typeof curHref != 'undefined' && curHref != '') {
-	                if(curHref == url || curHref == shortUrl) {
-	                    var targetDom = curTargetDom = $(this);
-	                    if(level < 0) {
-	                        for(var i = 0; i > level; i --) {
-	                            targetDom    = jQuery(targetDom).children('a'); 
-	                        }
-	                    } else if(level > 0) {
-	                        for(var i = 0; i < level; i ++) {
-	                            targetDom    = jQuery(targetDom).parent(); 
-	                        }
-	                    }
-	                    if(typeof callback != 'undefined') {
-	                        callback(targetDom, curTargetDom[0]);
-	                    }
-	                    $(targetDom[0]).addClass(currentClass);
-	                    
-	                    return false;
-	                }
-	            }
+	            $(this).find('a').each(function() {
+                    var curHref     = $(this).attr('href');    
+                    if(typeof curHref !== 'undefined' && curHref !== '') {
+                        if(curHref === url || curHref === shortUrl) {
+                            var targetDom = curTargetDom = $(this);
+                            if(level < 0) {
+                                for(var i = 0; i > level; i --) {
+                                    targetDom    = jQuery(targetDom).children('a'); 
+                                }
+                            } else if(level > 0) {
+                                for(var i = 0; i < level; i ++) {
+                                    targetDom    = jQuery(targetDom).parent(); 
+                                }
+                            }
+                            if(typeof callback != 'undefined') {
+                                callback(targetDom, curTargetDom[0]);
+                            }
+                            $(targetDom[0]).addClass(currentClass);
+                            
+                            return false;
+                        }
+                    }
+                });
 	        });
          },
     		 
