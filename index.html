@@ -32,37 +32,143 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
+        <h1 id="hjzjslib">hjzjslib</h1>
+        
+        <p>红橘子信息科技工作室开源Javascript工具库——关注点分离以基本开发思路，Fast &amp; Simple &amp; Stable!</p>
+        
+        <h2 id="1-开始使用">1 开始使用</h2>
+        
+        <p>在您想使用此类库之前，请先引用<code>jQuery1.7+</code></p>
+        
+        <pre>&lt;script src="path/to/jquery.1.7.2.js"&gt;&lt;/script&gt; &lt;!-- 添加jQuery依赖 --&gt;
+        &lt;script src="path/to/hhjslib/hhjslib.js"&gt;&lt;/script&gt; &lt;!-- 添加HHJsLib核心文件 --&gt;
+        </pre>
+        
+        <p>引入了以上两个文件后，即可开始使用<code>HHJsLib</code>的相关功能，我们会在下面的文字里慢慢为您展示<code>HHJsLib</code>的好用之处。</p>
+        
+        <h2 id="2-基础示例">2 基础示例</h2>
+        
+        <h3 id="21-页面初始化脚本">2.1 页面初始化脚本</h3>
+        
+        <p>使用过jQuery的您，应该每天都在写这样的代码： <br>
+        HTML代码：</p>
+        
+        <pre>&lt;a href="###" id="target-dom-id-1"&gt;给我绑定第一个事件&lt;/a&gt;
+        &lt;a href="###" id="target-dom-id-2"&gt;给我绑定第二个事件&lt;/a&gt;
+        </pre>
+        
+        <p>使用<code>jQuery</code>的Javascript代码示例：</p>
+        
+        <pre>$(function() {
+            //绑定target-dom-id-1处理事件
+            $("#target-dom-id-1").click(function() {
+                //do some thing
+            });
+            //绑定target-dom-id-2处理事件
+            $("#target-dom-id-2").click(function() {
+                //do some thing
+            });
+            .....
+        });
+        </pre>
+        
+        <p>使用<code>HHJsLib</code>的Javascript代码示例：</p>
+        
+        <pre>HHJsLib.register({
+            init: function() {
+                this.bindTargetDom1();
+                this.bindTargetDom2();
+            },
+            bindTargetDom1: function() {
+                $("#target-dom-id-1").click(function() {
+                    //do some job
+                });
+            },
+            bindTargetDom2: function() {
+                $("#target-dom-id-2").click(function() {
+                    //do some job
+                });
+            }
+        });
+        </pre>
+        
+        <p>可能你会说，<code>HHJsLib</code>的实现让原来的代码行数增加了不少，但请仔细看，<code>HHJsLib</code>的代码采用全面向对象的写法，及提倡语义化命名，所以相比使用<code>jQuery</code>的代码来讲，使用<code>HHJsLib</code>在代码的维护及管理上，更加的清晰明确。继续阅读下面的示例，相信您能更深的体会到这一写法的好处。</p>
+        
+        <h3 id="22-全面向对象的参数化写法">2.2 全面向对象的参数化写法</h3>
+        
+        <p><code>HHJsLib</code>初始化的入口为<code>register()</code>，就像您上面看到的示例代码一样，它需要有一个类对象作为参数，这个类里必须包含<code>init()</code>方法。如果您有<code>Java</code>、<code>PHP</code>等有类的概念语言基础，肯定对类的构造函数很熟悉，这个类里的<code>init()</code>也即是构造函数的概念，当前类里所有的初始化动作都会在此方法里调用完成。如果您想初始化哪些操作，需要将您的方法在<code>init()</code>方法里进行调用即可。这一设计的理念也是基于“单一入口”的原则，可以让调用及调试更加的便捷。同时，也让我们的代码变得重加的清晰，方法间的耦合度可以达到最低。</p>
+        
+        <h3 id="23-类方法里的内部调用">2.3 类方法里的内部调用</h3>
+        
+        <p>通常我们会在需要执行的类里有内部方法间调用的需求，如在点击了一个按钮事件时，需要调用执行类里的<code>methodB()</code>处理一些数据，并返回处理的结果，示例代码如下：</p>
+        
+        <pre>HHJsLib.register({
+            init: function() {
+                this.bindBtnClick();
+            }.
+            bindBtnClick: function() {
+                var _root   = this;
+                $("#btn-id").click(function() {
+                    //调用执行类里的方法methodB(params)
+                    alert(_root.methodB(1));
+                });
+            },
+            methodB: function(params) {
+                return params + 1;
+            }
+        });
+        </pre>
+        
+        <p>可能您已经注意到<code>_root</code>这个变量，对在执行类里的方法间调用，我们需要先定义一个中间变量把当前的类对象保存起来，就像这样<code>var _root = this;</code>之后，我们说可以在方法里的内部可以使用执行类里的所有属性及方法。再加一个使用属性的示例：</p>
+        
+        <pre>HHJsLib.register({
+            message: '友好提示：',
+            init: function() {
+                this.bindBtnClick();
+            },
+            bindBtnClick: function() {
+                var _root   = this;
+                $("#btn-id").click(function() {
+                    //调用执行类里的属性message
+                    alert(_root.title + "当前点击的是一个按钮！");
+                });
+            }
+        });
+        </pre>
+        
+        <h2 id="3-验证系列方法示例">3 验证系列方法示例</h2>
+        
+        <blockquote>
+          <p>正在加班为您赶制中…</p>
+        </blockquote>
+        
+        <h2 id="4-小工具系列方法示例">4 小工具系列方法示例</h2>
+        
+        <blockquote>
+          <p>正在加班为您赶制中…</p>
+        </blockquote>
+        
+        <h2 id="5-文件工具类示例">5 文件工具类示例</h2>
+        
+        <blockquote>
+          <p>正在加班为您赶制中…</p>
+        </blockquote>
+        
+        <h2 id="6-对话框类示例">6 对话框类示例</h2>
+        
+        <blockquote>
+          <p>正在加班为您赶制中…</p>
+        </blockquote>
+        
+        <h2 id="7-扩展自定义工具示例">7 扩展自定义工具示例</h2>
+        
+        <blockquote>
+          <p>正在加班为您赶制中…</p>
+        </blockquote>
+          
+        </section>
     </div>
 
     <!-- FOOTER  -->
