@@ -2,42 +2,39 @@
 /**
  * @version			$Id$
  * @create 			2012-8-30 16:04:14 By xjiujiu
- * @package 		is
- * @copyRight 		Copyright (c) 2011-2012 http://www.xjiujiu.com.All right reserved
+ * @package 		hhjslib
+ * @Copyright 		Copyright (c) 2011-2012 http://www.xjiujiu.com.All right reserved
  * HongJuZi Framework
  */
-
- /**
-  * HHJsLib的验证基础库 
-  * 
-  * 常用的空值检测，长度判断，邮箱验证等 
-  * 
-  * @author xjiujiu <xjiujiu@foxmail.com>
-  * @package is
-  * @since 1.0.0
-  */
  (function($) {
-    //验证工具类
-	 var HHValidate     = {
+
+     /**
+      * HHJsLib的验证基础库 
+      * 
+      * 常用的空值检测，长度判断，邮箱验证等 
+      * 
+      * @author xjiujiu <xjiujiu@foxmail.com>
+      * @package hhjslib
+      * @since HHJsLib 1.0.0
+      */
+	 var Validate     = {
         
         /**
          * 验证当前对象是否为空 
          * 
          * 包括对空对象，空对象的检测 
-         * 用法：
-         * <code>
+         * <pre>
          *      HHJsLib.isEmptyById('');  //true | false
          *      HHJsLib.isEmptyById('', '名称');  //异常提示
          *      HHJsLib.isEmptyById('', '名称', '我是默认的');    //异常提示
-         * </code>
+         * </pre>
          * 
          * @author 			xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String value 需要检测的值
-         * @param  String name 当前对象的名称
-         * @param  mix def 默认值
-         * @return Object HHJsLib 对象 | Boolean 是否为空
-         * @throws HHValidateException
+         * @param  {String} value 需要检测的值
+         * @param  {String} name 当前对象的名称
+         * @param  {Mixed} def 默认值
+         * @return {Object} HHJsLib 对象 | Boolean 是否为空
+         * @throws Exception
          */
         isEmpty: function(value, name, def) {
         	try {
@@ -61,20 +58,18 @@
         /**
          * 查看DOM元素的值是否为空
          * 
-         * 用法：
-         * <code>
+         * <pre>
          *      HHJsLib.isEmptyById('tag', '名称', '我是默认的');
          *      HHJsLib.isEmptyById('.className', '名称', '我是默认的');
          *      HHJsLib.isEmptyById('#domId', '名称', '我是默认的');
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String target 需要操作的DOM
-         * @param  String name 当前的dom的元素名称
-         * @param  mix def 里面的默认值
-         * @return Object HHJsLib对象 | Boolean 是否为空
-         * @throws HHValidateException 
+         * @param  {String} target 需要操作的DOM
+         * @param  {String} name 当前的dom的元素名称
+         * @param  {Mixed} def 里面的默认值
+         * @return {Object} HHJsLib对象 | Boolean 是否为空
+         * @throws Exception 
          */
         isEmptyByDom: function(target, name, def) {
             if('undefined' == typeof(def) && $(target).attr('data-def')) {
@@ -86,20 +81,19 @@
         /**
          * 验证字符串长度 
          * 
-         * 对当前串进行长度验证 ,用法：
-         * <code>
+         * 对当前串进行长度验证 ,
+         * <pre>
          *    HHJsLib.isStrLen("xjiujiu", "用户名", 1, 20); //ok
-         *    HHJsLib.isStrLen("", "用户名", 1, 20); //HHValidateException
-         * </code>
+         *    HHJsLib.isStrLen("", "用户名", 1, 20); //Exception
+         * </pre>
          * 
          * @author 			xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String value 需要验证的字串
-         * @param  String name 当前字串的名称
+         * @param  {String} value 需要验证的字串
+         * @param  {String} name 当前字串的名称
          * @param  int min 最少长度
          * @param  int max 最大长度
-         * @return Object HHJsLib对象 | Boolean 是否为空
-         * @throws HHValidateException
+         * @return {Object} HHJsLib对象 | Boolean 是否为空
+         * @throws Exception
          */
         isStrLen: function(value, name, min, max) {
             var lenInfo     = 'undefined' === typeof(max) ? min + '个字符以上' : min + '～' + max;
@@ -113,19 +107,17 @@
         /**
          * 通过文档元素的ID来验证当前值的长度是否合法 
          * 
-         * 用法：
-         * <code>
+         * <pre>
          *      HHJsLib.isStrLenByDom("domId", "名称", 2, 10);
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String target 需要操作的DOM
-         * @param  String name 当前元素的名称
+         * @param  {String} target 需要操作的DOM
+         * @param  {String} name 当前元素的名称
          * @param  int min 最少值
          * @param  int max 最大值
-         * @return Object HHJsLib | Boolean 是否符合要求
-         * @throws HHValidateException 
+         * @return {Object} HHJsLib | Boolean 是否符合要求
+         * @throws Exception 
          */
         isStrLenByDom: function(target, name, min, max) {
             return this._isValidateByDom(this.isStrLen, target, [name, min, max]);
@@ -134,17 +126,16 @@
         /**
          * 验证当前的邮箱地址是否合法 
          * 
-         * 对已知的邮箱地址进行合法性验证，用法如：
-         * <code>
+         * 对已知的邮箱地址进行合法性验证，如：
+         * <pre>
          *   HHJsLib.isEmail("xjiujiu@foxmai.com"); //ok
-         *   HHJsLib.isEmail("aa@aaa"); //HHValidateException
-         * </code>
+         *   HHJsLib.isEmail("aa@aaa"); //Exception
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String value 需要验证的目标邮箱地址
-         * @return Object HHJsLib对象 | Boolean 是否为空
-         * @throws HHValidateException 
+         * @param  {String} value 需要验证的目标邮箱地址
+         * @return {Object} HHJsLib对象 | Boolean 是否为空
+         * @throws Exception 
          */
         isEmail: function(value) {
             var emailRegExp     = /^(?:[a-zA-Z0-9]+[_\-\+\.]?)*[a-zA-Z0-9]+@(?:([a-zA-Z0-9]+[_\-]?)*[a-zA-Z0-9]+\.)+([a-zA-Z]{2,})+$/i; 
@@ -158,16 +149,14 @@
         /**
          * 通过文档的ID来验证邮箱值是否合法 
          * 
-         * 用法：
-         * <code>
+         * <pre>
          *      HHJsLib.isEmailById('#email_id'); 
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String target 检测目标
-         * @return Object HHJsLib对象 | Boolean 是否为空
-         * @throws HHValidateException
+         * @param  {String} target 检测目标
+         * @return {Object} HHJsLib对象 | Boolean 是否为空
+         * @throws Exception
          */
         isEmailByDom: function(target) {
             return this._isValidateByDom(this.isEmail, target);
@@ -176,21 +165,19 @@
         /**
          * 验证电话号码是否合法 
          * 
-         * 用法：
-         * <code>
-         *      HHJsLib.isPhone('127123132'); //throw HHValidateException
-         *      HHJsLib.isPhone('0745-2658963');  //正确 no HHValidateException
-         * </code>
+         * <pre>
+         *      HHJsLib.isPhone('127123132'); //throw Exception
+         *      HHJsLib.isPhone('0745-2658963');  //正确 no Exception
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String value 电话值
-         * @return Object HHJsLib对象 | Boolean 是否为空
-         * @throws HHValidateException
+         * @param  {String} value 电话值
+         * @return {Object} HHJsLib对象 | Boolean 是否为空
+         * @throws Exception
          */
         isPhone: function(value) {
-            var phoneRegExp     = /^1[35]?\d{5,9}$/; 
-            var telRegExp       = /^(([0+]\d{2,3}-)?(0\d{2,3})-)?(\d{7,8})(-(\d{3,}))?$/;
+            var phoneRegExp     = /^1[3584]?\d{5,9}$/; 
+            var telRegExp       = /^(([0+]\d{2,3}-)?(0\d{2,3})-)?(\d{6,8})(-(\d{3,}))?$/;
             if(!phoneRegExp.test(value) && !telRegExp.test(value)) {
                 throw HHJsLib.lang('PHONE_ERROR');
             }            
@@ -199,16 +186,14 @@
         /**
          * 通过当前DOM ID来验证值是否为正确的电话号码 
          * 
-         * 用法：
-         * <code>
+         * <pre>
          *      HHJsLib.isPhoneById('#phone_id');
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String target 检测目标
-         * @return HHJsLib 对象 | Boolean 是否有效
-         * @throws HHValidateException 
+         * @param  {String} target 检测目标
+         * @return {HHJsLib} 对象 | Boolean 是否有效
+         * @throws Exception 
          */
         isPhoneByDom: function(target) {
             return this._isValidateByDom(this.isPhone, target);
@@ -218,18 +203,16 @@
         /**
          * 验证值是否全为数字 
          * 
-         * 用法：
-         * <code>
+         * <pre>
          *      HHJsLib.isNumber(121323);   //Yes..
          *      HHJsLib.isNumber('est');   //异常抛出
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String num 需要检测的值
-         * @param  String name 当前检测的元素名称
-         * @return HHJsLib 对象 
-         * @throws HHValidateException 
+         * @param  {String} num 需要检测的值
+         * @param  {String} name 当前检测的元素名称
+         * @return {HHJsLib} 对象 
+         * @throws Exception 
          */
         isNumber: function (num, name) {
             if(!/^-?\d+.?\d*$/.test(num)) {
@@ -242,17 +225,15 @@
         /**
          * 通过当前DOM ID来验证值是否全为数字
          * 
-         * 用法：
-         * <code>
+         * <pre>
          *      HHJsLib.isNumberById('#dom-id', '名称');
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String target 检测目标
-         * @param  String name 名称
-         * @return HHJsLib 对象
-         * @throws HHValidateException 
+         * @param  {String} target 检测目标
+         * @param  {String} name 名称
+         * @return {HHJsLib} 对象
+         * @throws Exception 
          */
         isNumberByDom: function(target, name) {
             return this._isValidateByDom(this.isNumber, target, [name]);
@@ -261,13 +242,11 @@
 		/**
 		 * 是否为IE浏览器 
 		 * 
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isIE();
-		 * </code>
+		 * </pre>
 		 * 
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
          * @return boolean 是否为IE浏览器
 		 */
         isIE: function() {
@@ -277,14 +256,12 @@
         /**
 		 * 是否支持当前的文件类型 
 		 * 
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isFileType("#file-id", ".jpg,.gif");
-		 * </code>
+		 * </pre>
 		 * 
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
-         * @throws HHVerifyException 是否验证成功
+         * @throws Exception 是否验证成功
          */
         isFileType: function(types) {
         	var path 			= this.$target.val();
@@ -300,18 +277,16 @@
         /**
 		 * 是否支持当前所要求的日期格式
 		 * 
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isDateById("#date-id", "出生年月", "yyyy-mm");
-		 * </code>
+		 * </pre>
          * 
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
-         * @param  String target 检测目标
-         * @param  String name 当前的检测项目名称
-         * @param  String format 功能所支持的日期格式
-         * @throws HHVerifyException 是否验证成功
-         * @return HHJsLib 对象 
+         * @param  {String} target 检测目标
+         * @param  {String} name 当前的检测项目名称
+         * @param  {String} format 功能所支持的日期格式
+         * @throws Exception 是否验证成功
+         * @return {HHJsLib} 对象 
          */
         isDateByDom: function(target, name, format) {
             return this._isValidateByDom(this.isDate, target, [name, format]);
@@ -320,18 +295,16 @@
         /**
 		 * 是否支持当前所要求的日期格式
 		 * 
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isDate("200304", "出生年月", "yyyy-mm");
-		 * </code>
+		 * </pre>
 		 * 
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
-         * @param  String value 需要检测的值
-         * @param  String name 当前的检测项目名称
-         * @param  String format 功能所支持的日期格式
-         * @throws HHVerifyException 是否验证成功
-         * @return HHJsLib 对象 
+         * @param  {String} value 需要检测的值
+         * @param  {String} name 当前的检测项目名称
+         * @param  {String} format 功能所支持的日期格式
+         * @throws Exception 是否验证成功
+         * @return {HHJsLib} 对象 
          */
         isDate: function(value, name, format) {
         	var dateFormatMap 	= {
@@ -371,18 +344,16 @@
         /**
 		 * 是否支持当前所要求的日期格式
 		 * 
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isDateById("#date-id", "出生年月", "yyyy-mm");
-		 * </code>
+		 * </pre>
          * 
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
-         * @param  String target 检测目标
-         * @param  String name 当前的检测项目名称
-         * @param  String format 功能所支持的日期格式
-         * @throws HHVerifyException 是否验证成功
-         * @return HHJsLib 对象 
+         * @param  {String} target 检测目标
+         * @param  {String} name 当前的检测项目名称
+         * @param  {String} format 功能所支持的日期格式
+         * @throws Exception 是否验证成功
+         * @return {HHJsLib} 对象 
          */
         isDateTimeByDom: function(target, name, format) {
             return this._isValidateByDom(this.isDateTime, target, [name, format]);
@@ -391,10 +362,7 @@
         /**
          * 检测是否相等
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
          * @return 当前对像
          * @throws HVerifyException 验证异常
          */
@@ -413,18 +381,16 @@
         /**
 		 * 是否支持当前所要求的日期格式
 		 * 
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isDateTime("2003-04-01 12:23:43", "开始时间", "yyyy-mm-dd hh:mm:ss");
-		 * </code>
+		 * </pre>
 		 * 
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
-         * @param  String value 需要检测的值
-         * @param  String name 当前的检测项目名称
-         * @param  String format 功能所支持的日期格式
-         * @throws HHVerifyException 是否验证成功
-         * @return HHJsLib 对象
+         * @param  {String} value 需要检测的值
+         * @param  {String} name 当前的检测项目名称
+         * @param  {String} format 功能所支持的日期格式
+         * @throws Exception 是否验证成功
+         * @return {HHJsLib} 对象
          */
         isDateTime: function(value, name, format) {
         	var dateFormatMap 	= {
@@ -447,16 +413,14 @@
         /**
 		 * 身份证格式是否正确
 		 * 
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isIdCardByDom("#cardid_id");
-		 * </code>
+		 * </pre>
 		 * 
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
-         * @param  String target 检测目标
-         * @throws HHVerifyException 是否验证成功
-         * @return HHJsLib 对象 
+         * @param  {String} target 检测目标
+         * @throws Exception 是否验证成功
+         * @return {HHJsLib} 对象 
          */
         isIdCardByDom: function(target) {
             return this._isValidateByDom(this.isIdCard, target);
@@ -465,16 +429,14 @@
         /**
 		 * 身份证格式是否正确
 		 * 
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isIdCard("29u0u8080u09009");
-		 * </code>
+		 * </pre>
 		 * 
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
-         * @param  String value 需要检测的值
-         * @throws HHVerifyException 是否验证成功
-         * @return HHJsLib 对象 
+         * @param  {String} value 需要检测的值
+         * @throws Exception 是否验证成功
+         * @return {HHJsLib} 对象 
          */
         isIdCard: function(value) {
         	if(!(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(value))) {
@@ -487,15 +449,13 @@
         /**
 		 * 名族格式是否正确
          *
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isNation("#nation");
-		 * </code>
+		 * </pre>
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
-         * @param  String target 需要检测的对象
-         * @throws HHVerifyException 是否验证成功
-         * @return HHJsLib 对象 
+         * @param  {String} target 需要检测的对象
+         * @throws Exception 是否验证成功
+         * @return {HHJsLib} 对象 
          */ 
         isNationByDom: function(target) {
             return this._isValidateByDom(this.isNation, target);
@@ -504,16 +464,14 @@
         /**
 		 * 名族格式是否正确
 		 * 
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isNation("汉族");
-		 * </code>
+		 * </pre>
 		 * 
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
-         * @param  String value 需要检测的值
-         * @throws HHVerifyException 是否验证成功
-         * @return HHJsLib 对象 
+         * @param  {String} value 需要检测的值
+         * @throws Exception 是否验证成功
+         * @return {HHJsLib} 对象 
          */
         isNation: function(value) {
         	var nations = ",汉族,壮族,满族,回族,苗族,维吾尔族,土家族,彝族," +
@@ -530,46 +488,42 @@
         /**
 		 * 是否包含当前需要查找的字符串
 		 * 
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isHasStr(",1,2,3,", 1, "数字");
-		 * </code>
+		 * </pre>
 		 * 
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
-         * @param  String target 检测目标
-         * @param  String str 需要查找的字串
-         * @param  String name 当前的内容名称
-         * @param  String char 限定范围字符串 默认为：,
-         * @throws HHVerifyException 是否验证成功
-         * @return HHJsLib 对象 
+         * @param  {String} target 检测目标
+         * @param  {String} str 需要查找的字串
+         * @param  {String} name 当前的内容名称
+         * @param  {String} ch 限定范围字符串 默认为：,
+         * @throws Exception 是否验证成功
+         * @return {HHJsLib} 对象 
          */
-        isHasStrByDom: function(target, str, name, char) {
-            return this._isValidateByDom(this.isHasStr, target, [str, name, char]);
+        isHasStrByDom: function(target, str, name, ch) {
+            return this._isValidateByDom(this.isHasStr, target, [str, name, ch]);
         },
         
         /**
 		 * 是否包含当前需要查找的字符串
 		 * 
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isHasStr(",1,2,3,", 1, "数字");
-		 * </code>
+		 * </pre>
 		 * 
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
-         * @param  String str 对比的模板
-         * @param  String needle 需要查找的字串
-         * @param  String name 当前的内容名称
-         * @param  String char 限定范围字符串 默认为：,
-         * @throws HHVerifyException 是否验证成功
-         * @return HHJsLib 对象 
+         * @param  {String} str 对比的模板
+         * @param  {String} needle 需要查找的字串
+         * @param  {String} name 当前的内容名称
+         * @param  {String} ch 限定范围字符串 默认为：,
+         * @throws Exception 是否验证成功
+         * @return {HHJsLib} 对象 
          */
-        isHasStr: function(str, needle, name, char) {
-        	if(typeof char == 'undefined') {
-        		var char 	= ',';
+        isHasStr: function(str, needle, name, ch) {
+        	if(typeof ch == 'undefined') {
+        		var ch 	= ',';
         	}
-        	if(0 > str.indexOf(char + needle + char)) {
+        	if(0 > str.indexOf(ch + needle + ch)) {
         		throw name + HHJsLib.lang('HAS_INVALIDATE_INFO');
         	}
         	
@@ -579,14 +533,11 @@
         /**
          * 检测复选框是否选择
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String target 检测目标
-         * @param  String name 对象名称
+         * @param  {String} target 检测目标
+         * @param  {String} name 对象名称
          * @throws VerifyException 验证异常 
-         * @return HHJsLib 对象 
+         * @return {HHJsLib} 对象 
          */
         isCheckedByDom: function(target, name) {
             $(target).each(function() {
@@ -599,17 +550,15 @@
         /**
 		 * 是否包含当前需要查找的字符串
 		 * 
-		 * Example:
-		 * <code>
+		 * <pre>
 		 *  HHJsLib.isUrlByDom(",1,2,3,", "http://www.hongjuzi.net", "红橘子");
-		 * </code>
+		 * </pre>
 		 * 
 		 * @author xjiujiu <xjiujiu@foxmail.com>
-		 * @access public
-         * @param  String target 检测目标
-         * @param  String name 当前的内容名称
-         * @throws HHVerifyException 是否验证成功
-         * @return HHJsLib 对象 
+         * @param  {String} target 检测目标
+         * @param  {String} name 当前的内容名称
+         * @throws Exception 是否验证成功
+         * @return {HHJsLib} 对象 
          */
         isUrlByDom: function(target, name) {
             return this._isValidateByDom(this.isUrl, target, [name]);
@@ -618,13 +567,10 @@
         /**
          * 验证是否为合法URL地址
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String url 检测的URL
-         * @param  String name 名称
-         * @throws HHVerifyException 验证异常
+         * @param  {String} url 检测的URL
+         * @param  {String} name 名称
+         * @throws Exception 验证异常
          */
         isUrl: function(url, name) {
             var strRegex = '^((https|http|ftp|rtsp|mms)?://)'
@@ -646,13 +592,9 @@
         /**
          * 内部使用的通过DOM验证验证方法
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @return HHJsLib当前HHJsLib对象
-         * @throws HHVerifyException 验证异常 
-         * @return HHJsLib 对象 
+         * @return {HHJsLib}当前HHJsLib对象
+         * @throws Exception 验证异常 
          */
         _isValidateByDom: function(func, target, params) {
             try {
@@ -670,7 +612,7 @@
         }
      };
      //扩展到HHJsLib库中
-     HHJsLib.extend(HHValidate);
+     HHJsLib.extend(Validate);
 	 //添加验证的语言字典
      HHJsLib.mergeDict({
 		'zh-cn': {

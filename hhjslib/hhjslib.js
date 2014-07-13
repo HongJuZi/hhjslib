@@ -1,12 +1,21 @@
 /**
  * $Id$
- * @title HHJsLib
- * @description 基地Js库基础类
+ * @class HHJsLib
+ * @description 红橘子科技Js库基础类
  * @author xjiujiu (xjiujiu@foxmail.com)
  * @create 2012-08-13 9:30:00
  */
-//事件注册及自动初始化工具脚本
-var $HH = HHJsLib = window.HHJsLib = {
+
+/**
+ * HHJsLib 核心库
+ * 
+ * 核心库包括：初始化、事件容器、字典容器、语言配置等
+ * 
+ * @author xjiujiu <xjiujiu@foxmail.com>
+ * @package hhjslib 
+ * @since 1.0.0
+ */
+var HHJsLib = window.HHJsLib = {
     $target: null,      // 需要操作的对象
     dict: {},           //当前语种
     curLang: 'zh-cn',   //当前的语言配置
@@ -15,11 +24,8 @@ var $HH = HHJsLib = window.HHJsLib = {
     /**
      * 执行初始化动作
      * 
-     * @desc
-     * 
      * @author xjiujiu <xjiujiu@foxmail.com>
-     * @access public
-     * @return HHJsLib 库对象
+     * @return {HHJsLib} 库对象
      */
     init: function() {
         $.each(this._initMap, function(loc, item) {
@@ -32,14 +38,11 @@ var $HH = HHJsLib = window.HHJsLib = {
     /**
      * 选择需要操作的元素
      * 
-     * @desc
-     * 
      * @author xjiujiu <xjiujiu@foxmail.com>
-     * @access public
-     * @param  String target 需要查找的DOM对象
-     * @return HHJsLib 库对象
+     * @param  {String} target 需要查找的DOM对象
+     * @return {HHJsLib} 库对象
      */
-    $H: function(target) {
+    $: function(target) {
         this.$target    = $(target);
 
         return this;
@@ -48,12 +51,9 @@ var $HH = HHJsLib = window.HHJsLib = {
     /**
      * 得到对应的语言翻译
      * 
-     * @desc
-     * 
      * @author xjiujiu <xjiujiu@foxmail.com>
-     * @access public
-     * @param  String mask 语言标识
-     * @return HHJsLib 当前的库对象
+     * @param  {String} mask 语言标识
+     * @return {HHJsLib} 当前的库对象
      */
     lang: function(mask) {
         if('undefined' == typeof this.dict[this.curLang][mask]) {
@@ -66,12 +66,9 @@ var $HH = HHJsLib = window.HHJsLib = {
     /**
      * 合并语言字典
      * 
-     * @desc
-     * 
      * @author xjiujiu <xjiujiu@foxmail.com>
-     * @access public
      * @param  Array subDict 需要合并的字典
-     * @return HHJsLib 当前对象
+     * @return {HHJsLib} 当前对象
      */
     mergeDict: function(subDict) {
         for(var type in subDict) {
@@ -89,13 +86,10 @@ var $HH = HHJsLib = window.HHJsLib = {
     /**
      * 注册初始化事件
      * 
-     * @desc
-     * 
      * @author xjiujiu <xjiujiu@foxmail.com>
-     * @access public
-     * @param  Object obj 需要注册的事件对象
-     * @param  Function func 需要调用的对象方法
-     * @throws HHJsLib 
+     * @param {Object} obj 需要注册的事件对象
+     * @param Function func 需要调用的对象方法
+     * @return {HHJsLib}
      */
     register: function(obj, func) {
         if('undefined' == typeof obj) {
@@ -115,12 +109,9 @@ var $HH = HHJsLib = window.HHJsLib = {
     /**
      * 动态扩展库方法
      * 
-     * @desc
-     * 
      * @author xjiujiu <xjiujiu@foxmail.com>
-     * @access public
-     * @param  Object props 扩展功能对象
-     * @return HHJsLib 当前的库对象
+     * @param {Object} props 扩展功能对象
+     * @return {HHJsLib} 当前的库对象
      */
     extend: function(props) {
         for(var ele in props) {
@@ -130,5 +121,6 @@ var $HH = HHJsLib = window.HHJsLib = {
         return this;
     }
 };
+
 //文档加载完成，调用初始化方法
 $(function() { HHJsLib.init(); });

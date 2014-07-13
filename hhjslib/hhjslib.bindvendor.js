@@ -2,24 +2,21 @@
 /**
  * @version			$Id$
  * @create 			2012-8-20 15:32:53 By xjiujiu
- * @package 		render
- * @copyRight 		Copyright (c) 2011-2012 http://www.xjiujiu.com.All right reserved
+ * @package 		HHJsLib
+ * @Copyright 		Copyright (c) 2011-2012 http://www.xjiujiu.com.All right reserved
  * HongJuZi Framework
  */
-
- /**
-  * 对第三方JS效果插件的绑定 
-  * 
-  * 如：editor、lightbox、uploadify等 
-  * 
-  * @author 	xjiujiu <xjiujiu@foxmail.com>
-  * @package 	None
-  * @since 	    1.0.0
-  */
 (function($) {
 
-    //绑定第三方工具类
-	var HHBindVendor 	= {
+    /**
+     * 对第三方JS效果插件的绑定 
+     * 
+     * 如：editor、lightbox、uploadify等 
+     * 
+     * @author 	xjiujiu <xjiujiu@foxmail.com>
+     * @since 	HHJsLib 1.0.0
+    */
+	var BindVendor 	= {
 
         /**
          * @var Object editor: {} 编辑器对象
@@ -29,18 +26,16 @@
         /**
          * 绑定Ajax上传插件：Uploadify 
          * 
-         * 用法：
-         * <code>
+         * <pre>
          * //html代码
          * <div id="uploadify_id"></div>
          * //js 代码
          *  HHJsLib("#uploadify_id").bindUploadify(baseUrl);
-         * </code>
+         * </pre>
          * 
          * @author 			xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String baseUrl 相对路径
-         * @return HHJsLib 对象
+         * @param {String} baseUrl 相对路径
+         * @return {HHJsLib} 对象
          */
         bindUploadify: function(baseUrl, options){
             var _this   = this;
@@ -73,18 +68,16 @@
         /**
          * 绑定lightBox
          * 
-         * 用法：
-         * <code>
+         * <pre>
          * //HTML代码
          * <a href="http://xxx.xxx.xx/images/xxx.jgp" class="lightbox other-class">other demo</a>
          * //JS代码
          * HHJsLib("a.lightbox").bindLightBox(baseUrl);
-         * </code>
+         * </pre>
          * 
          * @author 			xjiujiu <xjiujiu@foxmail.com>
-         * @access public
          * @param String baseUrl 相对的基本路径
-         * @return HHJsLib 对象
+         * @return {HHJsLib} 对象
          */
 	    bindLightBox: function(target, baseUrl){
 	    	this.importCss([baseUrl + "/lightbox.css"]);
@@ -112,13 +105,10 @@
         /**
          * 绑定HTML在线编辑器 
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String editor 编辑器类型
-         * @param  String model 编辑器的模式：full, simple, base 三种
-         * @return HHJsLib 对象
+         * @param {String} editor 编辑器类型
+         * @param {String} model 编辑器的模式：full, simple, base 三种
+         * @return {HHJsLib} 对象
          */
         bindEditor: function(target, baseUrl, editor, model) {
             if(1 > $('#' + target).length) { return ; }
@@ -145,12 +135,9 @@
         /**
          * 得到编辑器的显示模式
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String model 编辑器的模式：full, simple, base 三种, 默认为：full
-         * @return String 模式标识
+         * @param {String} model 编辑器的模式：full, simple, base 三种, 默认为：full
+         * @return {String} 模式标识
          */
         _getEditorModel: function(model) {
         	if(typeof model == 'undefined') {
@@ -166,16 +153,14 @@
         /**
          * 绑定Ueditor编辑器 
          * 
-         * Example:
-         * <code>
+         * <pre>
          *  HHJsLib(".editor").bindUeditor("http://www.xjiujiu.com/editor");
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String baseUrl 相对路径
-         * @param  String model 编辑器的模式：full, simple, base 三种
-         * @return HHJsLib 对象
+         * @param {String} baseUrl 相对路径
+         * @param {String} model 编辑器的模式：full, simple, base 三种
+         * @return {HHJsLib} 对象
          */
         bindUeditor: function(target, baseUrl, model) {
         	var modelMap 	= {
@@ -244,16 +229,14 @@
         /**
          * 绑定xheditor编辑器 
          * 
-         * Example:
-         * <code>
+         * <pre>
          *  HHJsLib(".editor").bindXheditor("http://www.xjiujiu.com/editor");
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String baseUrl 相对路径
-         * @param  String model 编辑器的模式：full, simple, base 三种
-         * @return HHJsLib 对象
+         * @param {String} baseUrl 相对路径
+         * @param {String} model 编辑器的模式：full, simple, base 三种
+         * @return {HHJsLib} 对象
          */
         bindXheditor: function(target, baseUrl, model) {
 
@@ -263,16 +246,14 @@
         /**
          * 绑定tinymce编辑器 
          * 
-         * Example:
-         * <code>
+         * <pre>
          *  HHJsLib(".editor").bindTinymce("http://www.xjiujiu.com/editor");
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String baseUrl 相对路径
-         * @param  String model 编辑器的模式：full, simple, base 三种
-         * @return HHJsLib 对象
+         * @param {String} baseUrl 相对路径
+         * @param {String} model 编辑器的模式：full, simple, base 三种
+         * @return {HHJsLib} 对象
          */
         bindTinymce: function(target, baseUrl, model) {
 
@@ -282,16 +263,14 @@
         /**
          * 绑定Wysiwyg编辑器 
          * 
-         * Example:
-         * <code>
+         * <pre>
          *  HHJsLib(".editor").bindWysiwyg("http://www.xjiujiu.com/editor");
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String baseUrl 相对路径
-         * @param  String model 编辑器的模式：full, simple, base 三种
-         * @return HHJsLib 对象
+         * @param {String} baseUrl 相对路径
+         * @param {String} model 编辑器的模式：full, simple, base 三种
+         * @return {HHJsLib} 对象
          */
         bindWysiwyg: function(target, baseUrl, model) {
             var _this   = this;
@@ -309,16 +288,14 @@
         /**
          * 绑定Date插件,显示格式：1990-09-09
          * 
-         * Example:
-         * <code>
+         * <pre>
          *  HHJsLib(".create_time").bindDate("http://www.xjiujiu.com/editor");
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String baseUrl 相对路径
-         * @param  String format 日期格式
-         * @return HHJsLib 对象
+         * @param {String} baseUrl 相对路径
+         * @param {String} format 日期格式
+         * @return {HHJsLib} 对象
          */
         bindDate: function(baseUrl, format) {
         	if(typeof format == 'undefined') {
@@ -337,13 +314,11 @@
         /**
          * 设定当前日期的语言为中文
          * 
-         * Example:
-         * <code>
+         * <pre>
          *  HHJsLib._setDatePickerZhCnLang();
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
          */
         _setDatePickerZhCnLang: function() {
         	$.datepicker.regional['zh-CN'] = {
@@ -371,15 +346,13 @@
         /**
          * 绑定Date插件,显示格式：19900909
          * 
-         * Example:
-         * <code>
+         * <pre>
          *  HHJsLib(".create_time").bindDate("http://www.xjiujiu.com/editor");
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String baseUrl 相对路径
-         * @return HHJsLib对象
+         * @param {String} baseUrl 相对路径
+         * @return {HHJsLib}对象
          */
         bindDateTime: function(baseUrl, format) {
             if(typeof format == 'undefined') {
@@ -409,15 +382,13 @@
         /**
          * 绑定Date插件,显示格式：199009
          * 
-         * Example:
-         * <code>
+         * <pre>
          *  HHJsLib(".create_time").bindDate("http://www.xjiujiu.com/editor");
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String baseUrl 相对路径
-         * @return HHJsLib对象
+         * @param {String} baseUrl 相对路径
+         * @return {HHJsLib}对象
          */
         bindDateBirthday: function(baseUrl) {
         	this.bindDate(this.$target, baseUrl, 'yymm');
@@ -428,15 +399,13 @@
         /**
          * 绑定Date插件,显示中文格式：1990年09月09日
          * 
-         * Example:
-         * <code>
+         * <pre>
          *  HHJsLib.bindDate(".create_time", "http://www.xjiujiu.com/editor");
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String baseUrl 相对路径
-         * @return HHJsLib对象
+         * @param {String} baseUrl 相对路径
+         * @return {HHJsLib}对象
          */
         bindDateZn: function(baseUrl) {
         	this.bindDate(this.$target, baseUrl, 'yy年mm月dd日');
@@ -446,5 +415,5 @@
 
 	};
     //扩展到HHJsLib类功能中
-	HHJsLib.extend(HHBindVendor);
+	HHJsLib.extend(BindVendor);
 })(jQuery);

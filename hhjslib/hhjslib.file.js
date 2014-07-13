@@ -3,7 +3,7 @@
  * @version $Id$
  * @create 2012-12-23 16:26:21 By xjiujiu
  * @description HongJuZi Framework
- * @copyRight Copyright (c) 2011-2012 http://www.xjiujiu.com.All right reserved
+ * @Copyright Copyright (c) 2011-2012 http://www.xjiujiu.com.All right reserved
  */
  
  //引用importjs 2.1.2
@@ -56,13 +56,13 @@ var hexcase=0;var b64pad="";var chrsz=8;function hex_md5(a){return binl2hex(core
      * 那么就可以使用该工具插件来进行动态的加载，依赖require.js.2+
      * 
      * @author xjiujiu <xjiujiu@foxmail.com>
-     * @package js
+     * @package HHJsLib
      * @since 1.0.0
      */
-    var HHFile = {
+    var File = {
 
         /**
-         * @var importFiles: {} 已经导入的文件容器
+         * @var {Object} importFiles: {} 已经导入的文件容器
          */
         importFiles: {js: {}, css: {}},
         
@@ -72,9 +72,8 @@ var hexcase=0;var b64pad="";var chrsz=8;function hex_md5(a){return binl2hex(core
          * 不包含.，如test.txt => txt
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param path 需要加载的文件
-         * @return string 当前文件格式
+         * @param {String} path 需要加载的文件
+         * @return {String} 当前文件格式
          */
         getFileExt: function(path) {
             var file    = path.substring(path.lastIndexOf('/'));
@@ -90,14 +89,12 @@ var hexcase=0;var b64pad="";var chrsz=8;function hex_md5(a){return binl2hex(core
         /**
          * 加载Js文件 
          * 
-         * Example:
-         * <code>
+         * <pre>
          * HHRequire.importJs("http://www.xjiujiu.com/hhjslib.js");
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String[] jsPath 给定的Js文件路径
+         * @param {Array} jsPath 给定的Js文件路径
          * @param  Script callback 需要回调的参数
          */
         importJs: function(jsPath, callback) {
@@ -115,15 +112,13 @@ var hexcase=0;var b64pad="";var chrsz=8;function hex_md5(a){return binl2hex(core
         /**
          * 加载Css文件 
          * 
-         * Example:
-         * <code>
+         * <pre>
          *      HHJsLib.importCss("http://www.xjiujiu.com/css/hhjslib.css");
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String[] cssPath 需要加载的css文件路径
-         * @return HHJsLib 库对象
+         * @param {Array} cssPath 需要加载的css文件路径
+         * @return {HHJsLib} 库对象
          */
         importCss: function(cssPath) {
             var cssLinks    = "";
@@ -140,13 +135,12 @@ var hexcase=0;var b64pad="";var chrsz=8;function hex_md5(a){return binl2hex(core
         /**
          * 查看网页是否加载了给定的Js文件
          * 
-         * Example:
-         * <code>
+         * <pre>
          *  HHJsLib.filterLoadedJs("http://www.xjiujiu.com/hhjslib.js");
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @param  String filePath 需要加载的文件路径
+         * @param {String} filePath 需要加载的文件路径
          */
         filterLoadedJs: function(jsPath) {
             if(1 > this.importFiles.js.length) {
@@ -170,10 +164,9 @@ var hexcase=0;var b64pad="";var chrsz=8;function hex_md5(a){return binl2hex(core
         /**
          * 查看网页是否加载了给定的css文件
          * 
-         * Example:
-         * <code>
+         * <pre>
          *  HHJsLib.isCssLoaded("http://www.xjiujiu.com/hhjslib.js");
-         * </code>
+         * </pre>
          * 
          * @author xjiujiu <xjiujiu@foxmail.com>
          */
@@ -196,6 +189,6 @@ var hexcase=0;var b64pad="";var chrsz=8;function hex_md5(a){return binl2hex(core
             return cssPath;
         }
     };
-    HHJsLib.extend(HHFile);
+    HHJsLib.extend(File);
 })(jQuery);
 

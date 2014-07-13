@@ -1,9 +1,8 @@
-
 /**
  * @version $Id$
  * @create 2012-10-21 16:57:09 By xjiujiu
  * @description HongJuZi Framework
- * @copyRight Copyright (c) 2011-2012 http://www.xjiujiu.com.All right reserved
+ * @Copyright Copyright (c) 2011-2012 http://www.xjiujiu.com.All right reserved
  */
  (function($) {
 	 
@@ -13,15 +12,15 @@
       * 收集一些用户的小功能，小工具函数等 
       * 
       * @author xjiujiu <xjiujiu@foxmail.com>
-      * @package None
+      * @package hhjslib
       * @since 1.0.0
       */
-     var HHUtils    = {
+     var Utils    = {
 		
     	/**
 	     * 高亮显示当前链接元素[现在还得基于Jquery]
 	     * 
-	     * <code>
+	     * <pre>
 	     * //HTML部分:
 	     * <div class="navmenu">
 	         * <ul>
@@ -32,14 +31,14 @@
 	     * </div>
 	     * //JS部分：
 	     *  HHJsLib.highLightElement('.navmenu ul li', 'active', 0);
-	     * </code>
+	     * </pre>
 	     *
 	     * @param string target 需要高亮的元素
 	     * @param string currentClass 当前选中的样式名
 	     * @param string level 相对于当前查到元素的层级关系，往下是-N, 往上是+N
 	     * @param string callback 对找到的目标附加的函数调用
 	     *
-	     * @return HHJsLib 对象
+	     * @return {HHJsLib} 对象
 	     */
 	     highLightElement: function(target, currentClass, level, callback) {
             return this.highLightElementByUrl(window.location.href, target, currentClass, level, callback);
@@ -48,7 +47,7 @@
     	/**
 	     * 高亮显示当前链接元素[现在还得基于Jquery]指定了URL
 	     * 
-	     * <code>
+	     * <pre>
 	     * //HTML部分:
 	     * <div class="navmenu">
 	         * <ul>
@@ -59,20 +58,21 @@
 	     * </div>
 	     * //JS部分：
 	     *  HHJsLib.highLightElementByUrl(url, '.navmenu ul li', 'active', 0);
-	     * </code>
+	     * </pre>
 	     *
 	     * @param string target 需要高亮的元素
 	     * @param string currentClass 当前选中的样式名
 	     * @param string level 相对于当前查到元素的层级关系，往下是-N, 往上是+N
 	     * @param string callback 对找到的目标附加的函数调用
 	     *
-	     * @return HHJsLib 对象
+	     * @return {HHJsLib} 对象
 	     */
          highLightElementByUrl: function(url, target, currentClass, level, callback) {
 	        var shortUrl    = url.substring(url.lastIndexOf('/') + 1);//拿到当前访问的页面及查询内容
+            url             = decodeURIComponent(url);
 	        $(target).each(function() {
 	            $(this).find('a').each(function() {
-                    var curHref     = $(this).attr('href');    
+                    var curHref     = decodeURIComponent($(this).attr('href'));
                     if(typeof curHref !== 'undefined' && curHref !== '') {
                         if(curHref === url || curHref === shortUrl) {
                             var targetDom = curTargetDom = $(this);
@@ -100,14 +100,12 @@
          /**
           * 回到页面的面部 
           * 
-          * 用法：
-          * <code>
+          * <pre>
           * HHJsLib.goTop('btn-top-id');
-          * </code>
+          * </pre>
           * 
           * @author xjiujiu <xjiujiu@foxmail.com>
-          * @access public
-          * @param  String btnId 按钮的ID
+          * @param {String} btnId 按钮的ID
           * @return void
           * @throws none
           */
@@ -137,15 +135,13 @@
         /**
           * 重定向到其它页面 
           * 
-          * 用法：
-          * <code>
+          * <pre>
           * HHJsLib.redirect('http://www.xjiujiu.com', target);
-          * </code>
+          * </pre>
           * 
           * @author xjiujiu <xjiujiu@foxmail.com>
-          * @access public
-          * @param  String url 目标地址
-          * @param  String target 重定向的目标位置: self, blank
+          * @param {String} url 目标地址
+          * @param {String} target 重定向的目标位置: self, blank
           */
         redirect: function(url, target) {
             if(typeof target == 'undefined') {
@@ -165,15 +161,13 @@
         /**
           * 标记当前内容的状态
           * 
-          * 用法：
-          * <code>
+          * <pre>
           * HHJsLib.maskStatus('td.pass', {"是": "pass-ok", "否": "pass-no"});
-          * </code>
+          * </pre>
           * 
           * @author xjiujiu <xjiujiu@foxmail.com>
-          * @access public
           * @param  Map<String, String> 值对应的状态样式表,如：{1: "ok-status"}
-          * @return HHJsLib 当前的对象 
+          * @return {HHJsLib} 当前的对象 
           */
         maskStatus: function(map) {
         	this.$target.each(function() {
@@ -189,16 +183,14 @@
         /**
           * 打印预览，默认为A4的纸大小
           * 
-          * 用法：
-          * <code>
+          * <pre>
           * HHJsLib("#print-btn-id").printPriview("我是需要打印的内容");
-          * </code>
+          * </pre>
           * 
           * @author xjiujiu <xjiujiu@foxmail.com>
-          * @access public
-          * @param  String callback 回调函数 得到需要打印的内容
-          * @param  String title 打印页面的标题
-          * @return HHJsLib 当前的对象
+          * @param {String} callback 回调函数 得到需要打印的内容
+          * @param {String} title 打印页面的标题
+          * @return {HHJsLib} 当前的对象
           */
         printPriview: function(target, callback, title) {
         	$(target).click(function() {
@@ -257,15 +249,13 @@
         /**
           * 删除Table指定的列
           * 
-          * 用法：
-          * <code>
+          * <pre>
           * HHJsLib.deleteTableColumn($("#table-content-area").html(), [0, 12]);
-          * </code>
+          * </pre>
           * 
           * @author xjiujiu <xjiujiu@foxmail.com>
-          * @access public
-          * @param  Array subInfo 需要删除的列信息
-          * @return String 删除列后的表格HTML代码
+          * @param  {Array} subInfo 需要删除的列信息
+          * @return {String} 删除列后的表格HTML代码
           */
         deleteTableColumn: function(subInfo) {
         	if(typeof subInfo == 'undefined') {
@@ -292,13 +282,10 @@
         /**
           * 二级下拉效果
           * 
-          * 用法：
-          * JS CODE:
-          * <code>
+          * <pre>
+          * //JS CODE:
           * HHJsLib.dropMenu("ul.main-menu li", "dl.sub-link", "selected");
-          * </code>
-          * HTML CODE:
-          * <code>
+          * //HTML CODE:
           * <ul class="main-menu">
           * <li><a href="#">主菜单</a></li>
           * <li>
@@ -309,12 +296,12 @@
           *      <dd><a href="#">子菜单</a></dd>
           *     </dl>
           * </li>
-          * </code>
+          * </ul>
+          * </pre>
           * 
           * @author xjiujiu <xjiujiu@foxmail.com>
-          * @access public
-          * @param  Array subElementClass 子菜单的样式名 
-          * @param  Array currentClass 选中后的样式
+          * @param  {Array} subElementClass 子菜单的样式名 
+          * @param  {Array} currentClass 选中后的样式
           * @return 当前HHJsLib对象 
           */
         dropMenu: function (target, subElementClass, currentClass){
@@ -360,13 +347,10 @@
         /**
           * 二级下拉效果
           * 
-          * 用法：
-          * JS CODE:
-          * <code>
+          * //JS CODE:
+          * <pre>
           * HHJsLib("ul.main-menu li").slideUpDown("dl.sub-link", "selected");
-          * </code>
-          * HTML CODE:
-          * <code>
+          * //HTML CODE:
             <ul class="menu-list">
                 <li><a href="###">链接一</a>
                 	<ul class="sub-menu-list">
@@ -375,11 +359,10 @@
                      </ul>
                 </li>
             </ul>                
-          * </code>
+          * </pre>
           * 
           * @author xjiujiu <xjiujiu@foxmail.com>
-          * @access public
-          * @param  String target 需要处理的对象
+          * @param {String} target 需要处理的对象
           * @param  object callback 回调函数
           * @return 当前HHJsLib对象
           */
@@ -399,11 +382,8 @@
          /**
          * 字段域提示工具 
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String def 提示的信息
+         * @param {String} def 提示的信息
          * @return 当前HHJsLib对象
          */
         fieldHint: function(target) {
@@ -431,12 +411,9 @@
         /**
          * 设置成主页 
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param Object obj 当前的DOM对象
-         * @param String val 当前的网址
+         * @param {Object} obj 当前的DOM对象
+         * @param {String} val 当前的网址
          */
         setHomePage: function (obj, val){
             try{
@@ -459,12 +436,9 @@
         /**
          * 加入到收藏夹 
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String URL 需要收藏的链接
-         * @param  String title 网页标题
+         * @param {String} URL 需要收藏的链接
+         * @param {String} title 网页标题
          * @return Object 当前的HHJsLib对象
          */
         addFavorite: function (URL, title) {
@@ -489,11 +463,8 @@
         /**
          * 设置光标所在的位置
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String target 目标对象
+         * @param {String} target 目标对象
          * @param  int pos 位置
          */
         setCaretPosition: function (target, pos){
@@ -512,12 +483,9 @@
         /**
          * 得到光标所在的位置
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  DOM Object target 文档对象
-         * @return int 当前标签所在的位置
+         * @param {Object} Object target 文档对象
+         * @return {Number} 当前标签所在的位置
          */
         getCursortPosition: function  (target) {
             var CaretPos = 0;   // IE Support
@@ -536,12 +504,9 @@
         /**
          * 在元素区域当前光标位置插入内容
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  DOM Object target 文档对象
-         * @param  String str 需要加入的内容
+         * @param {Object} Object target 文档对象
+         * @param {String} str 需要加入的内容
          */
         insertAtCaret: function (target, str) {
             if('undefined' === typeof(target)) { return; }
@@ -563,17 +528,14 @@
                 target.value    = tempStr1 + str + tempStr2;
                 return;
             }
-            alert("您当前的浏览器版本不支持setSelectionRange，请升级到最新版本！");
+            HHJsLib.warn("您当前的浏览器版本不支持setSelectionRange，请升级到最新版本！");
         },
 
         /**
          * 解析DOM对象里的内容为URL
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  DOM 对象 target 需要解析的DOM对象
+         * @param {Object} 对象 target 需要解析的DOM对象
          */
         parseUrlByDom: function(target) {
              var _root  = this;
@@ -585,11 +547,8 @@
         /**
          * 解析URL地址
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  String content 需要解析的内容
+         * @param {String} content 需要解析的内容
          */
         parseUrl: function(content) {
              return content.replace(
@@ -601,18 +560,86 @@
         /**
          * 延时执行
          * 
-         * @desc
-         * 
          * @author xjiujiu <xjiujiu@foxmail.com>
-         * @access public
-         * @param  Function func 需要执行的方法
-         * @param  Double delay 延时长度
+         * @param  {Function} func 需要执行的方法
+         * @param  {Number} delay 延时长度
          */
         delayExec: function(func, delay) {
             setTimeout(func, delay);
-        }
+        },
 
+        /**
+         * 格式化格式文件
+         * 
+         * 跟当前时间对比，格式化后为：刚刚、多少秒前、多少分钟前...
+         * 
+         * @author xjiujiu <xjiujiu@foxmail.com>
+         * @param datetime 当前时间，2014-05-32 22:23:23
+         * @return {String} 格式化后的值
+         */
+        formatSendTime: function(datetime) {
+            var date       = new Date();
+            var curYear    = date.getFullYear();
+            var curMonth   = date.getMonth() + 1;
+            var curDay     = date.getDate();
+            var curHour    = date.getHours();
+            var curMin     = date.getMinutes();
+            var dateTimeInfo   = datetime.split(' ');
+            var dateInfo   = dateTimeInfo[0].split('-');
+            var timeInfo   = dateTimeInfo[1].split(':');
+            if(0 < curYear - parseInt(dateInfo[0])) {
+                return datetime;
+            }
+            if(0 < curMonth - parseInt(dateInfo[1])) {
+                return datetime;
+            }
+            var passTime   = 0 >= curDay - parseInt(dateInfo[2]) ? '' : curDay - parseInt(dateInfo[2]) + '天';
+            passTime       += 0 >= curHour - parseInt(timeInfo[0]) ? '' : curHour - parseInt(timeInfo[0]) + '小时';
+            passTime       += 0 >= curMin - parseInt(timeInfo[1]) ? '' : curMin - parseInt(timeInfo[1]) + '分';
+            if('' === passTime) {
+                var curSec     = date.getSeconds();
+                return 20 > curSec - parseInt(timeInfo[2]) ? '刚刚' : curSec - parseInt(timeInfo[2]) + '秒';
+            }
+
+            return passTime + '以前';
+         },
+
+         /**
+          * 格式化文件大小单位
+          * 
+          * 分为B, KB, MB, GB, TB 等5个级别
+          * 
+          * @author xjiujiu <xjiujiu@foxmail.com>
+          * @param size 当前文件大小，B单位
+          * @return 格式化后的值
+          */
+         formatFileSize: function(size) {
+            if(1024 > size) {  //Bytes级
+                return 0 == size ? '未知' : size + 'Bytes';
+            }
+            if(1048756 > size) {   //KB级
+                return this.float(size / 1024, 2) + 'KB';
+            }
+            if(1073741824 > size) { //M级
+                return this.float(size / 1048756, 2) + 'M';
+            }
+            if(1099511627776 > size) {  //G级
+                return this.float(size / 1073741824, 2) + 'G';
+            }
+            if(1125899906842624 > $size) { //T级
+                return this.float(size / 1099511627776, 2) + 'T';
+            }
+         },
+         float: function(val, number) {
+             val        = val.toString();
+             var loc    = val.indexOf('.');
+             if(0 > loc || (loc + 3) > val.length) {
+                 return val;
+             }
+
+             return val.substring(0, loc + 3);
+         }
      };
      //注册到HHJsLib的扩展中
-     HHJsLib.extend(HHUtils);
+     HHJsLib.extend(Utils);
  })(jQuery);
