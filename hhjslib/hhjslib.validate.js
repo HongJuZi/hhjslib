@@ -602,7 +602,7 @@
                 $(target).each(function() {
                     HHJsLib.$target     = $(this);
                     params.unshift(HHJsLib.$target.val());
-                    func.apply(HHValidate, params);
+                    func.apply(Validate, params);
                 });
 
                 return this;

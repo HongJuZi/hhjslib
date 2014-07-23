@@ -209,7 +209,7 @@
                 function() {
                 	var width 	= "" != $target.attr("width") ? parseInt($target.attr("width")) : 800;
                 	var height 	= "" != $target.attr("height") ? parseInt($target.attr("height")) : 100;
-                	HHBindVendor.editor[target]     = UE.getEditor(
+                	BindVendor.editor[target]     = UE.getEditor(
                 		target,
                 		{
                 			initialContent: '',
@@ -361,7 +361,7 @@
         	this.importJs(
                 [baseUrl + "/timepicker/jquery-ui-timepicker-addon-0.5.min.js"],
                 function() {
-                    HHBindVendor._setDatePickerZhCnLang();
+                    BindVendor._setDatePickerZhCnLang();
                     this.$target.datetimepicker({
                         showSecond: true, //显示秒
                         dateFormat: "yy-mm-dd",//格式化时间
