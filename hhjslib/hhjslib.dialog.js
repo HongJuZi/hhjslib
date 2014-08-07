@@ -130,7 +130,7 @@
                 return false;
             }
             if(confirm(msg)) {
-                return 'undefined' !== typeof(callback) ? false: callback();
+                return 'undefined' === typeof(callback) ? false : callback();
             }
 
             return false;
